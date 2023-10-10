@@ -27,11 +27,29 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        # s = s.split(" ")
-        # pattern = list(pattern)
-        # return len(set(s)) == len(set(pattern)) and len(pattern) == len(s)
+        words = s.split(' ')
+        if len(words) != len(pattern):
+            return False
+
+        char_to_word = {}
+        word_to_char = {}
+        for char, word in zip(pattern, words):
+            if char in char_to_word and char_to_word[char] != word:
+                return False
+
+            if word in word_to_char and word_to_char[word] != char:
+                return False
+
+            char_to_word[char] = word
+            word_to_char[word] = char
+
+        return True
 
 
 print(Solution.wordPattern('abba', 'dog cat cat dog'))
+print(Solution.wordPattern('abba', 'dog dog dog dog'))
 print(Solution.wordPattern('aba', 'dog cat cat dog'))
+print(Solution.wordPattern('abab', 'dog cat cat fish'))
 print(Solution.wordPattern('aba', 'dog cat cat'))
+print(Solution.wordPattern('a', 'a'))
+print(Solution.wordPattern('abc', 'b c a'))
