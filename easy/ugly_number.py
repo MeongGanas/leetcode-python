@@ -24,7 +24,7 @@ Explanation: 14 is not ugly since it includes the prime factor 7.
 
 
 class Solution(object):
-    def isUgly(self, n):
+    def isUgly(n):
         if n <= 0:
             return False
 
