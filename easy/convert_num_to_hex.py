@@ -23,18 +23,22 @@ class Solution(object):
         :type num: int
         :rtype: str
         """
-        if num < 0:
-            num += 2**32
-        hex_number = ""
-        hex_digits = "0123456789abcdef"
-        while(num>0):
-            remender = num % 16
-            hex_number = hex_digits[remender] + hex_number
-            num /= 16
-        if hex_number != "":
-            return(hex_number)
-        else:
-            return "0"
+        hex_ = []
+        negative = 0
+        if num < 0: 
+            num = 2**31 + num
+            negative = 8
+        while num/16.0 >= 1:
+            hex_.append(num%16)
+            num = num //16
+        hex_.append(num+negative)
+        hex_ = hex_[::-1]
+        while negative == 8 and len(hex_) != 8:
+            hex_.append(0)
+        rep = "0123456789abcdef"
+        for i in range(len(hex_)):
+            hex_[i] = rep[hex_[i]]
+        return ''.join(hex_)
 
 
 
