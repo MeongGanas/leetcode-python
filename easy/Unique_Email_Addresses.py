@@ -30,17 +30,26 @@ class Solution(object):
         :type emails: List[str]
         :rtype: int
         """
-        uniq = []
-        for email in emails:
-            local, domain = email.split('@')
-            local = ''.join(local.split('.'))
-            if "+" in local:
-                local = local.split('+')[0]
-            email = local + '@' + domain
-            if email not in uniq:
-                uniq.append(email)
+        # uniq = []
+        # for email in emails:
+        #     local, domain = email.split('@')
+        #     local = ''.join(local.split('.'))
+        #     if "+" in local:
+        #         local = local.split('+')[0]
+        #     email = local + '@' + domain
+        #     if email not in uniq:
+        #         uniq.append(email)
 
-        return uniq
+        # return uniq
+
+        result = set()
+        for email in emails:
+            email_id, domain = email.split("@")
+            email_id = email_id.split("+")[0]
+            email_id = email_id.replace(".", "")
+            result.add(email_id + "@"+domain)
+            
+        return len(result)
         
 solution = Solution()
 print(solution.numUniqueEmails(["test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"]))
